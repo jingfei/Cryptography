@@ -4,17 +4,18 @@
 	<script src="jquery.min.js"></script>
 </head>
 <body>
-<div style="text-align: center">
+<div id="Left">
 	<input type="radio" name="Choice" id="Auto" value="Auto" checked="checked"/>Auto
 	<input type="radio" name="Choice" id="Manual" value="Manual"/>Manual
 	<br/>
 	<table id="ID"></table>
 </div>
-<div style="text-align: center">
-	<textarea style="width: 40%;" id="Input"></textarea>
-	<textarea style="width: 40%;" id="Output" readonly></textarea>
+<div id="Main">
+	<textarea id="Input"></textarea>
 	<br/>
 	<button onClick="Convert();">convert</button>
+	<br/>
+	<textarea id="Output" readonly></textarea>
 </div>
 
 </body>
@@ -67,46 +68,69 @@ function AutoChanged(){
 
 function ForAuto(){
 	var Inner="";
-	Inner="<tr><th>before</th>";
 	for($i=0; $i<26; ++$i){
-		Inner += "<td>"+String.fromCharCode(65+$i)+"</td>";
+		Inner += "<tr><td>"+String.fromCharCode(65+$i)+"</td>";
+		/*add selection on 'A'*/
+		if($i==0){
+			Inner += "<td><select id='AutoSelection' onchange='AutoChanged();'>";
+			for($j=0; $j<26; ++$j)
+				Inner += "<option value='"+$j+"'>"+String.fromCharCode(65+$j)+"</option>";
+			Inner += "</select></td>";
+		}
+		/*********************/
+		else
+			Inner +="<td id='t"+$i+"'>"+String.fromCharCode(65+$i)+"</td>";
+		Inner += "</tr>";
 	}
-	Inner += "</tr><tr><th>after</th>";
-	/*add selection on 'A'*/
-	Inner += "<td><select id='AutoSelection' onchange='AutoChanged();'>";
-	for($i=0; $i<26; ++$i)
-		Inner += "<option value='"+$i+"'>"+String.fromCharCode(65+$i)+"</option>";
-	Inner += "</select></td>";
-	/*********************/
-	for($j=1; $j<26; ++$j)
-		Inner +="<td id='t"+$j+"'>"+String.fromCharCode(65+$j)+"</td>";
-	Inner += "</tr>";
 	return Inner;
 }
  
 function ForManual(){
 	var Inner = "";
-	Inner = "<tr><th>before</th>";
-	for($i=0; $i<26; ++$i)
+	for($i=0; $i<26; ++$i){
+		Inner += "<tr>";
 		Inner += "<td>"+String.fromCharCode(65+$i)+"</td>";
-	Inner += "</tr><tr><th>after</th>";
-	for($j=0; $j<26; ++$j){
-		Inner += "<td><select id = 'a"+$j+"'>";
-		for($i=0; $i<26; ++$i){
+		Inner += "<td><select id = 'a"+$i+"'>";
+		for($k=0; $k<26; ++$k){
 			Inner += "<option ";
-			if($i===$j)
+			if($k===$i)
 				Inner += "selected='selected' ";
-			Inner += "value='"+$i+"'>"+String.fromCharCode(65+$i)+"</option>";
+			Inner += "value='"+$k+"'>"+String.fromCharCode(65+$k)+"</option>";
 		}
 		Inner += "</select></td>";
+		Inner += "</tr>";
 	}
-	Inner += "</tr>";
 	return Inner;
 }
 
 </script>
 <style>
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
 #ID td{
 	width: 40px;
+}
+
+#Left {
+	width: 19%;
+	float: left;
+	text-align: center;
+
+}
+
+#Main{
+	width: 80%;
+	height: 100%;
+//	display: inline-block;
+	float: right;
+	text-align: center;
+}
+
+#Main textarea{
+	width: 80%;
+	height: 40%;
 }
 </style>
