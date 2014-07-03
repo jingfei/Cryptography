@@ -11,11 +11,12 @@
 	<table id="ID"></table>
 </div>
 <div id="Main">
-	<textarea id="Input"></textarea>
+	<h1>Make your Own Code</h1>
+	<textarea id="Input" placeholder="Put your text here"></textarea>
 	<br/>
 	<button onClick="Convert();">convert</button>
 	<br/>
-	<textarea id="Output" readonly></textarea>
+	<textarea id="Output" placeholder="This is result" readonly></textarea>
 </div>
 
 </body>
@@ -70,6 +71,7 @@ function ForAuto(){
 	var Inner="";
 	for($i=0; $i<26; ++$i){
 		Inner += "<tr><td>"+String.fromCharCode(65+$i)+"</td>";
+		Inner += "<td><img src='arrow.svg'/></td>";
 		/*add selection on 'A'*/
 		if($i==0){
 			Inner += "<td><select id='AutoSelection' onchange='AutoChanged();'>";
@@ -90,6 +92,7 @@ function ForManual(){
 	for($i=0; $i<26; ++$i){
 		Inner += "<tr>";
 		Inner += "<td>"+String.fromCharCode(65+$i)+"</td>";
+		Inner += "<td><img src='arrow.svg'/></td>";
 		Inner += "<td><select id = 'a"+$i+"'>";
 		for($k=0; $k<26; ++$k){
 			Inner += "<option ";
@@ -106,19 +109,30 @@ function ForManual(){
 </script>
 <style>
 html, body{
+	background-color: #4FB99F;
 	width: 100%;
 	height: 100%;
 }
 
+#ID{
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+}
+
 #ID td{
-	width: 40px;
+	width: 33%;
+	height: 25px;
 }
 
 #Left {
-	width: 19%;
-	float: left;
+	width: 20%;
+	position: absolute;
 	text-align: center;
-
+	color: #112F41;
+	background-color: #06B587;
+	top: 0px;
+	left: 0px;
 }
 
 #Main{
@@ -129,8 +143,18 @@ html, body{
 	text-align: center;
 }
 
+#Main img{
+	height: 100%;
+}
+
+#Main h1{
+	color: #ED553B;
+}
+
 #Main textarea{
 	width: 80%;
 	height: 40%;
+	background-color: #F2B134;
+	font-size: 18px;
 }
 </style>
