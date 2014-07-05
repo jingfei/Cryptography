@@ -112,12 +112,14 @@ html, body{
 	background-color: #4FB99F;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 
 #ID{
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
+	height: 100%;
 }
 
 #ID td{
@@ -127,12 +129,16 @@ html, body{
 
 #Left {
 	width: 20%;
+	height: 99%;
 	position: absolute;
 	text-align: center;
+	padding: 10px 0;
+	font-size: 20px;
 	color: #112F41;
 	background-color: #06B587;
 	top: 0px;
 	left: 0px;
+	overflow-y: scroll;
 }
 
 #Main{
