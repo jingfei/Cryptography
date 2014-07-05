@@ -1,5 +1,5 @@
 /* Style for Usual tabs */
-#Left li { list-style:none; float:left; }
+#Left li { list-style:none; float:left; width: 33%;}
 #Left ul{
 	margin: 0;
 	padding: 0;
@@ -11,7 +11,7 @@
   text-decoration:none!important;
   *margin:1px;
   *margin-left:0;
-  font:22px Verdana;
+  font:20px Verdana;
   font-weight: bold;
   color:#FFF;
   background:#4FB99F;
