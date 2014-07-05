@@ -36,6 +36,9 @@
 	<br/>
 	<textarea id="Output" placeholder="This is result" readonly></textarea>
 </div>
+<div id="footer">
+	Designed by JingFei
+</div>
 
 </body>
 </html>
@@ -227,6 +230,7 @@ html, body{
 
 #Main h1{
 	color: #ED553B;
+	margin: 10px;
 }
 
 #Main textarea{
@@ -235,4 +239,12 @@ html, body{
 	background-color: #F2B134;
 	font-size: 18px;
 }
+
+#footer{
+ position: fixed; 
+ bottom:2px; 
+ right:5px; 
+ color:#112F41;
+}
+
 </style>
