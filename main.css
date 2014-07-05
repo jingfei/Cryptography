@@ -1,0 +1,38 @@
+/* Style for Usual tabs */
+#Left li { list-style:none; float:left; }
+#Left ul{
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+#Left ul a {
+  display:block;
+  padding:6px 10px;
+  text-decoration:none!important;
+  *margin:1px;
+  *margin-left:0;
+  font:22px Verdana;
+  font-weight: bold;
+  color:#FFF;
+  background:#4FB99F;
+}
+#Left ul a:hover {
+  color:#112F41;
+  background:#06B587;
+}
+#Left ul a.selected {
+  margin-bottom:0;
+  color:#112F41;
+  background:#06B587;
+  border-bottom:1px solid #06B587;
+  cursor:default;
+  }
+#Left div {
+  padding:10px 10px 8px 10px;
+  *padding-top:3px;
+  *margin-top:-15px;
+  clear:left;
+  background:#06B587;
+  *font:10pt Georgia;
+}
+

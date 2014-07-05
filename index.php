@@ -2,13 +2,31 @@
 <html>
 <head>
 	<script src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.idTabs.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 <body>
 <div id="Left">
-	<input type="radio" name="Choice" id="Auto" value="Auto" checked="checked"/>Auto
-	<input type="radio" name="Choice" id="Manual" value="Manual"/>Manual
-	<br/>
-	<table id="ID"></table>
+	<ul class="idTabs">
+		<li><a href="#Capital">Capital</a></li>
+		<li><a href="#Lower">Lower</a></li>
+		<li><a href="#Others">Others</a></li>
+	</ul>
+	<div id="Capital">
+		<input type="radio" name="Choice_Cap" id="Auto" value="Auto" checked="checked"/>Auto
+		<input type="radio" name="Choice_Cap" id="Manual" value="Manual"/>Manual
+		<br/>
+		<table id="ID_Cap"></table>
+	</div>
+	<div id="Lower">
+		<input type="radio" name="Choice_Low" id="Auto" value="Auto" checked="checked"/>Auto
+		<input type="radio" name="Choice_Low" id="Manual" value="Manual"/>Manual
+		<br/>
+		<table id="ID_Low"></table>
+	</div>
+	<div id="Others">
+		<table id="ID_Other"></table>
+	</div>
 </div>
 <div id="Main">
 	<h1>Make your Own Code</h1>
@@ -22,14 +40,27 @@
 </body>
 </html>
 <script>
-$(document).ready( $('#ID').html(ForAuto()) );
+$(document).ready(function(){
+	$('#ID_Cap').html(ForAuto(1));
+	$('#ID_Low').html(ForAuto(2));
+	$('#ID_Other').html(ForManual(3));
+});
 
-$('input:radio').change(
+$('input[name=Choice_Cap]:radio').change(
 	function(){
-		if($('input[name=Choice]:checked').val()=="Auto")
-			$('#ID').html(ForAuto());
-		else if($('input[name=Choice]:checked').val()=="Manual")
-			$('#ID').html(ForManual());
+		if($('input[name=Choice_Cap]:checked').val()=="Auto")
+			$('#ID_Cap').html(ForAuto(1));
+		else if($('input[name=Choice_Cap]:checked').val()=="Manual")
+			$('#ID_Cap').html(ForManual(1));
+	}
+);
+
+$('input[name=Choice_Low]:radio').change(
+	function(){
+		if($('input[name=Choice_Low]:checked').val()=="Auto")
+			$('#ID_Low').html(ForAuto(2));
+		else if($('input[name=Choice_Low]:checked').val()=="Manual")
+			$('#ID_Low').html(ForManual(2));
 	}
 );
 
@@ -41,17 +72,22 @@ function Convert(){
 	var $Text = $('#Input').val();
 	var $Ans = $Text;
 	if(!$Text) return;
-	for($i=0; $i<26; $i++){
-		var $Before = String.fromCharCode(65+$i);
+	for($i=33; $i<127; $i++){
+		var $Before = String.fromCharCode($i);
 		var $After = $('#a'+$i+' option:selected').text();
 		if(!$After){
-			if($i==0) $After = $('#AutoSelection option:selected').text();
-			else $After = $('#t'+$i).html();
+			$After = $('#t'+$i).html();
+			if(!$After && $i<97)
+				$After = $('#AutoSelection option:selected').text();
+			else if(!$After)
+				$After = $('#AutoSelection2 option:selected').text();
 		}
+		if($Before=="(" || $Before==")" || $Before=="[" || $Before=="{" || $Before=="*" || $Before=="+" || $Before=="." || $Before=="$" || $Before=="^" || $Before=="\\" || $Before=="|" || $Before=="?")
+			$Before = "\\" + $Before;
 		$n = $Text.search($Before);
 		while($n!=-1){
 			$Ans = $Ans.replaceAt($n,$After);
-			$Text = $Text.replaceAt($n,"*");
+			$Text = $Text.replaceAt($n," ");
 			$n = $Text.search($Before);
 		}
 	}
@@ -59,46 +95,84 @@ function Convert(){
 	$('#Output').val($Ans);
 }
 
-function AutoChanged(){
-	var Name = parseInt($('#AutoSelection').val());
+function AutoChanged(Choice){
+	var Name, Start;
+	if(Choice==1){ Name = parseInt($('#AutoSelection').val()); Start=65;}
+	else if(Choice==2){ Name = parseInt($('#AutoSelection2').val()); Start=97;}
 	for($i=Name+1, $j=1; $j<26; ++$i, ++$j){
 		if($i==26) $i=0;
-		$('#t'+$j).html(String.fromCharCode(65+$i));
+		CharNum = (Start+$j).toString();
+		$('#t'+ CharNum ).html(String.fromCharCode(Start+$i));
 	}
 }
 
-function ForAuto(){
+function ForAuto(Choice){
 	var Inner="";
+	var Start;
+	switch(Choice){
+		case 1: Start=65; break;
+		case 2: Start=97; break;
+		default: Start=33;
+	}
 	for($i=0; $i<26; ++$i){
-		Inner += "<tr><td>"+String.fromCharCode(65+$i)+"</td>";
+		CharCode = String.fromCharCode(Start+$i);
+		CharNum = (Start+$i).toString();
+		Inner += "<tr><td>"+ CharCode +"</td>";
 		Inner += "<td><img src='arrow.svg'/></td>";
 		/*add selection on 'A'*/
 		if($i==0){
-			Inner += "<td><select id='AutoSelection' onchange='AutoChanged();'>";
+			if(Choice == 1)
+				Inner += "<td><select id='AutoSelection' onchange='AutoChanged(1);'>";
+			else if(Choice == 2)
+				Inner += "<td><select id='AutoSelection2' onchange='AutoChanged(2);'>";
 			for($j=0; $j<26; ++$j)
-				Inner += "<option value='"+$j+"'>"+String.fromCharCode(65+$j)+"</option>";
+				Inner += "<option value='"+$j+"'>"+String.fromCharCode(Start+$j)+"</option>";
 			Inner += "</select></td>";
 		}
 		/*********************/
-		else
-			Inner +="<td id='t"+$i+"'>"+String.fromCharCode(65+$i)+"</td>";
+		else{
+			Inner +="<td id='t"+ CharNum +"'>"+ CharCode +"</td>";
+		}
 		Inner += "</tr>";
 	}
 	return Inner;
 }
- 
-function ForManual(){
+
+function ForManual(Choice){
 	var Inner = "";
-	for($i=0; $i<26; ++$i){
+	var ar;
+	switch(Choice){
+		case 1:
+			ar = new Array(26);  
+			for($i=65, $j=0; $j<26; ++$i, ++$j)
+				ar[$j]=$i;
+			break;
+		case 2: 
+			ar = new Array(26);  
+			for($i=97, $j=0; $j<26; ++$i, ++$j)
+				ar[$j]=$i;
+			break;
+		default: 
+			ar = new Array(42);  
+			for($i=33, $j=0; $j<42; ++$i, ++$j){
+				if($i==65) $i=91;
+				else if($i==97) $i=123;
+				ar[$j]=$i;
+			}
+	}
+	Length = ar.length;
+	for($i=0; $i<Length; ++$i){
+		CharCode = String.fromCharCode(ar[$i]);
+		CharNum = ar[$i].toString();
 		Inner += "<tr>";
-		Inner += "<td>"+String.fromCharCode(65+$i)+"</td>";
+		Inner += "<td>"+ CharCode +"</td>";
 		Inner += "<td><img src='arrow.svg'/></td>";
-		Inner += "<td><select id = 'a"+$i+"'>";
-		for($k=0; $k<26; ++$k){
+		Inner += "<td><select id = 'a"+ CharNum +"'>";
+		for($k=0; $k<Length; ++$k){
 			Inner += "<option ";
 			if($k===$i)
 				Inner += "selected='selected' ";
-			Inner += "value='"+$k+"'>"+String.fromCharCode(65+$k)+"</option>";
+			Inner += "value='"+$k+"'>"+String.fromCharCode(ar[$k])+"</option>";
 		}
 		Inner += "</select></td>";
 		Inner += "</tr>";
@@ -115,14 +189,14 @@ html, body{
 	overflow: hidden;
 }
 
-#ID{
+#ID_Cap, #ID_Low, #ID_Other{
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
 	height: 100%;
 }
 
-#ID td{
+#ID_Cap td, #ID_Low td, #ID_Other td{
 	width: 33%;
 	height: 25px;
 }
@@ -132,10 +206,9 @@ html, body{
 	height: 99%;
 	position: absolute;
 	text-align: center;
-	padding: 10px 0;
 	font-size: 20px;
 	color: #112F41;
-	background-color: #06B587;
+	background-color: #4FB99F;
 	top: 0px;
 	left: 0px;
 	overflow-y: scroll;
@@ -144,7 +217,6 @@ html, body{
 #Main{
 	width: 80%;
 	height: 100%;
-//	display: inline-block;
 	float: right;
 	text-align: center;
 }
