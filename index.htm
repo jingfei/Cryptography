@@ -2,192 +2,29 @@
 <html>
 	<head>
 		<title>Cryptography</title>
-		<script src="jquery.min.js"></script>
 	</head>
 	<body>
-		<div id="Main">
-			<h1>Make your Own Code</h1>
-			<table>
-				<tr style="height: 10%">
-					<th>Key: </th>
-					<td><input type="text" id="key"></td>
-				</tr>
-				<tr style="height: 35%">
-					<th>Code: </th>
-					<td><textarea id="code"></textarea></td>
-				</tr>
-				<tr style="height: 20%">
-					<td></td>
-					<th>
-					<button class="Button" onClick="Encode();">encode</button>
-					<button class="Button" onClick="Decode();">decode</button>
-					</th>
-				</tr>
-				<tr style="height: 35%">
-					<th>Result: </th>
-					<td><textarea id="result"></textarea></td>
-				</tr>
-			</table>
-		</div>
-		<div id="Right">
-			<table id="Table">
-			</table>
-		</div>
-		<div id="footer">
-			Designed by JingFei
-		</div>
+		<h1>Cryptography</h1>
+		<button class="Button" onClick="location.href='Stage1.htm';">Stage1</button>
+		<button class="Button" onClick="location.href='Stage1.htm';">Stage2</button>
+		
 	</body>
 </html>
 
-<script>
-$(document).ready(function(){
-	ShowTable();
-});
-
-function ShowTable(){
-	var Table="";
-	Table += "<tr><th></th>";
-	for($i=0; $i<26; ++$i)
-		Table += "<th>"+String.fromCharCode($i+97)+"</th>";
-	Table += "</tr>";
-	for($i=0; $i<26; ++$i){
-		Table += "<tr>";
-		Table += "<th>"+String.fromCharCode($i+65)+"</th>";
-		for($j=$i, $k=0; $k<26; ++$j, ++$k){
-			if($j>=26) $j=0;
-			var Classc = "c"+String.fromCharCode($k+65);
-			var Classr = "r"+String.fromCharCode($i+65);
-			Table += "<td class='"+Classc+' '+Classr+"'>"+String.fromCharCode($j+65)+"</td>";
-		}
-		Table += "</tr>";
-	}
-	$("#Table").html(Table);
-}
-
-function ExtendKey($Key, $Code){
-	/*return Table background color*/
-	for($i=0; $i<26; ++$i)
-		$(".r"+String.fromCharCode($i+65)).css({"backgroundColor":"transparent"});
-	/*******************************/
-	/*key to upper case and renew*/
-	$Key = $Key.toUpperCase();
-	$("#key").val($Key);
-	/*****************************/
-	for($i=0; $i<$Key.length; ++$i)
-		$(".r"+$Key[$i]).css({"backgroundColor":"#06B587"});
-	$LongKey = $Key;
-	while($LongKey.length < $Code.length) $LongKey += $Key;
-	if($LongKey.length > $Code.length) 
-		$LongKey = $LongKey.substr(0,$Code.length);
-	return $LongKey;
-}
-
-function isalpha($c){
-	if($c.charCodeAt(0)>=65 && $c.charCodeAt(0)<=90) return true;
-	if($c.charCodeAt(0)>=97 && $c.charCodeAt(0)<=122) return true;
-	return false;
-}
-
-function Encode(){
-	$Key = $("#key").val();
-	$Code = $("#code").val();
-	$Code = $Code.toLowerCase();
-	$("#code").val($Code);
-	$LongKey = ExtendKey($Key, $Code);
-	$Ans = "";
-	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])){
-			$Ans += $Code[$i];
-			continue;
-		}
-		$(".c"+$Code[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
-		$(".r"+$LongKey[$i]+".c"+$Code[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
-		var $tmp = $LongKey.charCodeAt($i)-65;
-		$tmp += $Code.charCodeAt($i)-97;
-		if($tmp >= 26) $tmp-=26;
-		$Ans += String.fromCharCode($tmp+65);
-	}
-	$("#result").val($Ans);
-}
-
-function Decode(){
-	$Key = $("#key").val();
-	$Code = $("#code").val();
-	$Code = $Code.toUpperCase();
-	$("#code").val($Code);
-	$LongKey = ExtendKey($Key, $Code);
-	$Ans = "";
-	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])){
-			$Ans += $Code[$i];
-			continue;
-		}
-		var $tmp = $LongKey.charCodeAt($i)-65;
-		$tmp = $Code.charCodeAt($i)-65-$tmp;
-		if($tmp < 0) $tmp+=26;
-		$Ans += String.fromCharCode($tmp+97);
-		$(".c"+$Ans[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
-		$(".r"+$LongKey[$i]+".c"+$Ans[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
-	}
-	$("#result").val($Ans);
-}
-
-</script>
 <style>
-html, body{
-	background-color: #4FB99F;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	color: #112F41;
-}
-
-#Right{
-	right: 10px;
-	position: absolute;
-}
-
-#Right #Table{
-	width:20px;
-	text-align:center;
-}
-
-#Main{
-	font-weight: bold;
-	width: 55%;
-	height: 100%;
-	float: left;
-	padding: 10px 0;
-}
-
-#Main h1{
+html{
+	background: url('cryptography.jpg') no-repeat fixed center center / cover transparent;
 	text-align: center;
+}
+
+h1{
 	margin: 20px;
-	text-shadow:4px 4px 3px #ED553B;
-}
-
-#Main table{
-	width: 100%;
-	height: 80%;
-}
-
-#Main input{
-	background-color: #F2B134;
-	font-size: 18px;
-}
-
-#Main textarea{
-	width: 100%;
-	height: 100%;
-	background-color: #F2B134;
-	font-size: 18px;
-}
-
-#footer{
- position: fixed; 
- bottom:2px; 
- left:5px; 
- color:#112F41;
+	color: #ED553B;
+	text-shadow:4px 4px 3px white;
+	text-align: center;
+	font-size: 7em;
+	font-weight: 200;
+	margin-top: 1.3em;
 }
 
 .Button {
@@ -205,7 +42,7 @@ html, body{
     -webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
     -moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
     box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-    margin: 20px 20px 40px 20px;
+    margin: 40px 30px;
 	width: 160px;
 	text-align: center;
 	
@@ -224,4 +61,3 @@ html, body{
     top: 6px;
 }
 </style>
-
