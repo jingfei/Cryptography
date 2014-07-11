@@ -4,6 +4,7 @@
 	<script src="jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.idTabs.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="main.css"/>
+	<title>Cryptography</title>
 </head>
 <body>
 <div id="Left">
@@ -32,7 +33,7 @@
 	<h1>Make your Own Code</h1>
 	<textarea id="Input" placeholder="Put your text here"></textarea>
 	<br/>
-	<button onClick="Convert();">convert</button>
+	<button id="Button" onClick="Convert();">convert</button>
 	<br/>
 	<textarea id="Output" placeholder="This is result" readonly></textarea>
 </div>
@@ -219,7 +220,7 @@ html, body{
 
 #Main{
 	width: 80%;
-	height: 100%;
+	height: 95%;
 	float: right;
 	text-align: center;
 }
@@ -229,13 +230,13 @@ html, body{
 }
 
 #Main h1{
-	color: #ED553B;
-	margin: 10px;
+	margin: 20px;
+	text-shadow:4px 4px 3px #ED553B;
 }
 
 #Main textarea{
 	width: 80%;
-	height: 40%;
+	height: 35%;
 	background-color: #F2B134;
 	font-size: 18px;
 }
@@ -245,6 +246,40 @@ html, body{
  bottom:2px; 
  right:5px; 
  color:#112F41;
+}
+
+#Button {
+	position: relative;
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+    background-color: rgba(219,87,5,1);
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: 700;
+    font-size: 2em;
+    padding: 4px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+    margin: 10px 0 30px 0;
+	width: 160px;
+	text-align: center;
+	
+	-webkit-transition: all .1s ease;
+	-moz-transition: all .1s ease;
+	-ms-transition: all .1s ease;
+	-o-transition: all .1s ease;
+	transition: all .1s ease;
+}
+
+#Button:active {
+    -webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+    position: relative;
+    top: 6px;
 }
 
 </style>
