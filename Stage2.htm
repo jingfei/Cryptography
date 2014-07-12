@@ -73,12 +73,19 @@ function ExtendKey($Key, $Code){
 	$Key = $Key.toUpperCase();
 	$("#key").val($Key);
 	/*****************************/
-	for($i=0; $i<$Key.length; ++$i)
-		$(".r"+$Key[$i]).css({"backgroundColor":"#06B587"});
-	$LongKey = $Key;
+	$LongKey = "";
+	for($i=0, $j=0; $i<$Code.length; ++$i){
+		if($j >= $Key.length) $j=0;
+		if(isalpha($Code[$i]))
+			$LongKey += $Key[$j++];
+		else
+			$LongKey += $Code[$i];
+	}
+/*	
 	while($LongKey.length < $Code.length) $LongKey += $Key;
 	if($LongKey.length > $Code.length) 
 		$LongKey = $LongKey.substr(0,$Code.length);
+*/
 	return $LongKey;
 }
 
@@ -100,14 +107,13 @@ function Encode(){
 			$Ans += $Code[$i];
 			continue;
 		}
-		$(".c"+$Code[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
-		$(".r"+$LongKey[$i]+".c"+$Code[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
 		var $tmp = $LongKey.charCodeAt($i)-65;
 		$tmp += $Code.charCodeAt($i)-97;
 		if($tmp >= 26) $tmp-=26;
 		$Ans += String.fromCharCode($tmp+65);
 	}
 	$("#result").val($Ans);
+	Color($Key, $LongKey, $Code);
 }
 
 function Decode(){
@@ -126,10 +132,28 @@ function Decode(){
 		$tmp = $Code.charCodeAt($i)-65-$tmp;
 		if($tmp < 0) $tmp+=26;
 		$Ans += String.fromCharCode($tmp+97);
-		$(".c"+$Ans[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
-		$(".r"+$LongKey[$i]+".c"+$Ans[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
 	}
 	$("#result").val($Ans);
+	Color($Key, $LongKey, $Ans);
+}
+
+function Color($Key, $LongKey, $Before){
+	/*different Table color for key row*/
+	for($i=0; $i<$Key.length; ++$i)
+		$(".r"+$Key[$i]).css({"backgroundColor":"#06B587"});
+	/***********************************/
+	
+	/* different color for Before code */
+	for($i=0; $i<$Before.length; ++$i)
+		if(isalpha($Before[$i]))
+			$(".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
+	/***********************************/
+
+	/* different color for target code */
+	for($i=0; $i<$Before.length; ++$i)
+		if(isalpha($Before[$i]))
+			$(".r"+$LongKey[$i]+".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
+	/***********************************/
 }
 
 </script>
