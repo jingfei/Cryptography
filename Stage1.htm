@@ -9,21 +9,14 @@
 <body>
 <div id="Left">
 	<ul class="idTabs">
-		<li><a href="#Capital">Capital</a></li>
-		<li><a href="#Lower">Lower</a></li>
+		<li><a href="#Alphabet">Alphabet</a></li>
 		<li><a href="#Others">Others</a></li>
 	</ul>
-	<div id="Capital">
-		<input type="radio" name="Choice_Cap" id="Auto" value="Auto" checked="checked"/>Auto
-		<input type="radio" name="Choice_Cap" id="Manual" value="Manual"/>Manual
+	<div id="Alphabet">
+		<input type="radio" name="Choice_Alp" id="Auto" value="Auto" checked="checked"/>Auto
+		<input type="radio" name="Choice_Alp" id="Manual" value="Manual"/>Manual
 		<br/>
-		<table id="ID_Cap"></table>
-	</div>
-	<div id="Lower">
-		<input type="radio" name="Choice_Low" id="Auto" value="Auto" checked="checked"/>Auto
-		<input type="radio" name="Choice_Low" id="Manual" value="Manual"/>Manual
-		<br/>
-		<table id="ID_Low"></table>
+		<table id="ID_Alp"></table>
 	</div>
 	<div id="Others">
 		<table id="ID_Other"></table>
@@ -45,26 +38,16 @@
 </html>
 <script>
 $(document).ready(function(){
-	$('#ID_Cap').html(ForAuto(1));
-	$('#ID_Low').html(ForAuto(2));
+	$('#ID_Alp').html(ForAuto(1));
 	$('#ID_Other').html(ForManual(3));
 });
 
-$('input[name=Choice_Cap]:radio').change(
+$('input[name=Choice_Alp]:radio').change(
 	function(){
-		if($('input[name=Choice_Cap]:checked').val()=="Auto")
-			$('#ID_Cap').html(ForAuto(1));
-		else if($('input[name=Choice_Cap]:checked').val()=="Manual")
-			$('#ID_Cap').html(ForManual(1));
-	}
-);
-
-$('input[name=Choice_Low]:radio').change(
-	function(){
-		if($('input[name=Choice_Low]:checked').val()=="Auto")
-			$('#ID_Low').html(ForAuto(2));
-		else if($('input[name=Choice_Low]:checked').val()=="Manual")
-			$('#ID_Low').html(ForManual(2));
+		if($('input[name=Choice_Alp]:checked').val()=="Auto")
+			$('#ID_Alp').html(ForAuto(1));
+		else if($('input[name=Choice_Alp]:checked').val()=="Manual")
+			$('#ID_Alp').html(ForManual(1));
 	}
 );
 
@@ -76,15 +59,17 @@ function Convert(){
 	var $Text = $('#Input').val();
 	var $Ans = $Text;
 	if(!$Text) return;
+	/* change all input to lower-alpha */
+	$Text = $Text.toLowerCase();
+	$('#Input').val($Text);
+	/***********************************/
 	for($i=33; $i<127; $i++){
 		var $Before = String.fromCharCode($i);
 		var $After = $('#a'+$i+' option:selected').text();
 		if(!$After){
 			$After = $('#t'+$i).html();
-			if(!$After && $i<97)
+			if(!$After)
 				$After = $('#AutoSelection option:selected').text();
-			else if(!$After)
-				$After = $('#AutoSelection2 option:selected').text();
 		}
 		if($Before=="(" || $Before==")" || $Before=="[" || $Before=="{" || $Before=="*" || $Before=="+" || $Before=="." || $Before=="$" || $Before=="^" || $Before=="\\" || $Before=="|" || $Before=="?")
 			$Before = "\\" + $Before;
@@ -99,43 +84,41 @@ function Convert(){
 	$('#Output').val($Ans);
 }
 
-function AutoChanged(Choice){
-	var Name, Start;
-	if(Choice==1){ Name = parseInt($('#AutoSelection').val()); Start=65;}
-	else if(Choice==2){ Name = parseInt($('#AutoSelection2').val()); Start=97;}
+function AutoChanged(){
+	var Name = parseInt($('#AutoSelection').val());
+	var Start1 = 97;
+	var Start2 = 65;
 	for($i=Name+1, $j=1; $j<26; ++$i, ++$j){
 		if($i==26) $i=0;
-		CharNum = (Start+$j).toString();
-		$('#t'+ CharNum ).html(String.fromCharCode(Start+$i));
+		CharNum = (Start1+$j).toString();
+		$('#t'+ CharNum ).html(String.fromCharCode(Start2+$i));
 	}
 }
 
 function ForAuto(Choice){
 	var Inner="";
-	var Start;
+	var Start1, Start2;
 	switch(Choice){
-		case 1: Start=65; break;
-		case 2: Start=97; break;
-		default: Start=33;
+		case 1: Start1=97; Start2=65; break;
+		default: Start1=33; Start2=33;
 	}
 	for($i=0; $i<26; ++$i){
-		CharCode = String.fromCharCode(Start+$i);
-		CharNum = (Start+$i).toString();
-		Inner += "<tr><td>"+ CharCode +"</td>";
+		CharCode1 = String.fromCharCode(Start1+$i);
+		CharCode2 = String.fromCharCode(Start2+$i);
+		CharNum = (Start1+$i).toString();
+		Inner += "<tr><td>"+ CharCode1 +"</td>";
 		Inner += "<td><img src='arrow.svg'/></td>";
 		/*add selection on 'A'*/
 		if($i==0){
 			if(Choice == 1)
-				Inner += "<td><select id='AutoSelection' onchange='AutoChanged(1);'>";
-			else if(Choice == 2)
-				Inner += "<td><select id='AutoSelection2' onchange='AutoChanged(2);'>";
+				Inner += "<td><select id='AutoSelection' onchange='AutoChanged();'>";
 			for($j=0; $j<26; ++$j)
-				Inner += "<option value='"+$j+"'>"+String.fromCharCode(Start+$j)+"</option>";
+				Inner += "<option value='"+$j+"'>"+String.fromCharCode(Start2+$j)+"</option>";
 			Inner += "</select></td>";
 		}
 		/*********************/
 		else{
-			Inner +="<td id='t"+ CharNum +"'>"+ CharCode +"</td>";
+			Inner +="<td id='t"+ CharNum +"'>"+ CharCode2 +"</td>";
 		}
 		Inner += "</tr>";
 	}
@@ -144,30 +127,29 @@ function ForAuto(Choice){
 
 function ForManual(Choice){
 	var Inner = "";
-	var ar;
+	var ar1, ar2;
 	switch(Choice){
 		case 1:
-			ar = new Array(26);  
-			for($i=65, $j=0; $j<26; ++$i, ++$j)
-				ar[$j]=$i;
-			break;
-		case 2: 
-			ar = new Array(26);  
-			for($i=97, $j=0; $j<26; ++$i, ++$j)
-				ar[$j]=$i;
+			ar1 = new Array(26);  
+			ar2 = new Array(26);
+			for($k=65, $i=97, $j=0; $j<26; ++$k, ++$i, ++$j){
+				ar1[$j]=$i;
+				ar2[$j]=$k;
+			}
 			break;
 		default: 
-			ar = new Array(42);  
+			ar1 = new Array(26);  
+			ar2 = new Array(26);
 			for($i=33, $j=0; $j<42; ++$i, ++$j){
 				if($i==65) $i=91;
 				else if($i==97) $i=123;
-				ar[$j]=$i;
+				ar1[$j]=ar2[$j]=$i;
 			}
 	}
-	Length = ar.length;
+	var Length = ar1.length;
 	for($i=0; $i<Length; ++$i){
-		CharCode = String.fromCharCode(ar[$i]);
-		CharNum = ar[$i].toString();
+		CharCode = String.fromCharCode(ar1[$i]);
+		CharNum = ar1[$i].toString();
 		Inner += "<tr>";
 		Inner += "<td>"+ CharCode +"</td>";
 		Inner += "<td><img src='arrow.svg'/></td>";
@@ -176,7 +158,7 @@ function ForManual(Choice){
 			Inner += "<option ";
 			if($k===$i)
 				Inner += "selected='selected' ";
-			Inner += "value='"+$k+"'>"+String.fromCharCode(ar[$k])+"</option>";
+			Inner += "value='"+$k+"'>"+String.fromCharCode(ar2[$k])+"</option>";
 		}
 		Inner += "</select></td>";
 		Inner += "</tr>";
@@ -193,14 +175,14 @@ html, body{
 	overflow: hidden;
 }
 
-#ID_Cap, #ID_Low, #ID_Other{
+#ID_Alp, #ID_Other{
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
 	height: 100%;
 }
 
-#ID_Cap td, #ID_Low td, #ID_Other td{
+#ID_Alp td, #ID_Other td{
 	width: 33%;
 	height: 25px;
 }
