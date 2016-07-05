@@ -1,5 +1,25 @@
+/* translate table */
+#table-trans > tbody > tr > td {
+	border: none;
+	text-align: center;
+	vertical-align: middle;
+}
+#table-trans > tbody > tr > td:nth-child(even) {
+	background-color: #61c0a9;
+}
+#table-trans > tbody > tr > td:nth-child(odd) {
+	background-color: #73c8b3;
+}
+#table-trans > tbody > tr > td > input {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
 /* Style for Usual tabs */
-#Left li { list-style:none; float:left; width: 50%;}
+#Left li { list-style:none; float:left; width: 50%; }
 #Left ul{
 	margin: 0;
 	padding: 0;
