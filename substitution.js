@@ -85,6 +85,7 @@ function Convert(){
 function alphRenew(val){
 	/* init */
 	var len = val.length;
+	if(len>25) len=25;
 	var lastAlph = len===0 ? 65 : val.charCodeAt(len-1)+1;
 	for(var i=0; i<26; ++i) alph[i]=false;
 	/* handle code alph */
