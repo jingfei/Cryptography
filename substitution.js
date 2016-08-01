@@ -27,12 +27,8 @@ String.prototype.replaceAt = function(index, character){
 }
 
 function Convert(){
-	var input = $('#Input').val();
+	var input = $('#Input').val() || "Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs...";
 	var output = input;
-	if(!input){ 
-		alert("Please enter step 3's text.");
-		return;
-	}
 	$('.result').show();
 	$('html, body').animate({
 		scrollTop: $("#result").offset().top
