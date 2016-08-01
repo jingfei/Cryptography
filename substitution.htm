@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<link rel="stylesheet" type="text/css" href="substitution.css"/>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<title>Cryptography</title>
@@ -13,7 +14,7 @@
 	<form class="form-inline" role="form" style="margin:10px 0">
 		<div class="form-group">
 			<label for="code" style="font-size:20px;vertical-align:middle">code: </label>
-			<input id="code" class="form-control" style="vertical-align:middle;background:rgba(255,255,255,.3);font-size:18px"/>
+			<input id="code" class="input form-control" style="text-transform:uppercase" maxlength='26' />
 		</div>
 	</form>
 	<table class="table table-condensed table-trans">
@@ -50,14 +51,14 @@
 <h2>Step 3:</h2>
 <div class="content" id="step3">
 	<div>Put original text here:</div>
-	<textarea id="Input" placeholder="Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs..."></textarea>
+	<textarea id="Input" placeholder="Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs..." style="margin:0 3%;"></textarea>
 </div>
 <div class="content" style="text-align:center">
-	<button id="Button" onClick="Convert();">convert</button>
+	<button class="Button" onClick="Convert();">convert</button>
 </div>
 <h2 class="result">Result:</h2>
 <div class="content result" id="result">
-	<textarea id="Output" readonly></textarea>
+	<textarea id="Output" style="margin:0 3%;" readonly></textarea>
 	<div id="barChart"></div>
 </div>
 <div id="footer">
