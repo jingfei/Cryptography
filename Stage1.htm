@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="main.css"/>
+	<link rel="stylesheet" type="text/css" href="Stage1.css"/>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<title>Cryptography</title>
 </head>
 <body>
+	<h1>Make your Own Code</h1>
 <form class="form-inline" role="form">
 	<div class="form-group">
 		<label for="code">code: </label>
 		<input id="code" class="form-control"/>
 	</div>
 </form>
-<table class="table table-condensed" id="table-trans">
+<table class="table table-condensed table-trans">
 	<tr><td>a</td> <td>b</td> <td>c</td> <td>d</td> <td>e</td>
 			<td>f</td> <td>g</td> <td>h</td> <td>i</td> <td>j</td>
 			<td>k</td> <td>l</td> <td>m</td> <td>n</td> <td>o</td>
@@ -25,35 +26,21 @@
 			<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
 			<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
 			<td>&#8595;</td> </tr>
-	<tr><td id="a1">A</td> <td id="a2">B</td> <td id="a3">C</td> 
-			<td id="a4">D</td> <td id="a5">E</td>
-			<td id="a6">F</td> <td id="a7">G</td> <td id="a8">H</td> 
-			<td id="a9">I</td> <td id="a10">J</td>
-			<td id="a11">K</td> <td id="a12">L</td> <td id="a13">M</td> 
-			<td id="a14">N</td> <td id="a15">O</td>
-			<td id="a16">P</td> <td id="a17">Q</td> <td id="a18">R</td> 
-			<td id="a19">S</td> <td id="a20">T</td>
-			<td id="a21">U</td> <td id="a22">V</td> <td id="a23">W</td> 
-			<td id="a24">X</td> <td id="a25">Y</td>
-			<td id="a26">Z</td> </tr>
+	<tr><td id="a97">A</td> <td id="a98">B</td> <td id="a99">C</td> 
+			<td id="a100">D</td> <td id="a101">E</td>
+			<td id="a102">F</td> <td id="a103">G</td> <td id="a104">H</td> 
+			<td id="a105">I</td> <td id="a106">J</td>
+			<td id="a107">K</td> <td id="a108">L</td> <td id="a109">M</td> 
+			<td id="a110">N</td> <td id="a111">O</td>
+			<td id="a112">P</td> <td id="a113">Q</td> <td id="a114">R</td> 
+			<td id="a115">S</td> <td id="a116">T</td>
+			<td id="a117">U</td> <td id="a118">V</td> <td id="a119">W</td> 
+			<td id="a120">X</td> <td id="a121">Y</td>
+			<td id="a122">Z</td> </tr>
 </table>
-<div id="Left" style="display:none">
-	<ul class="idTabs">
-		<li><a href="#Alphabet">Alphabet</a></li>
-		<li><a href="#Others">Others</a></li>
-	</ul>
-	<div id="Alphabet">
-		<input type="radio" name="Choice_Alp" id="Auto" value="Auto" checked="checked"/>Auto
-		<input type="radio" name="Choice_Alp" id="Manual" value="Manual"/>Manual
-		<br/>
-		<table id="ID_Alp"></table>
-	</div>
-	<div id="Others">
-		<table id="ID_Other"></table>
-	</div>
-</div>
+<table class="table table-condensed table-trans" id="table-other1"></table>
+<table class="table table-condensed table-trans" id="table-other2"></table>
 <div id="Main">
-	<h1>Make your Own Code</h1>
 	<textarea id="Input" placeholder="Put your text here"></textarea>
 	<br/>
 	<button id="Button" onClick="Convert();">convert</button>
@@ -68,103 +55,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript" src="jquery.idTabs.min.js"></script>
 <script type="text/javascript" src="Stage1.js"></script>
-<style>
-html, body{
-	background-color: #4FB99F;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-#ID_Alp, #ID_Other{
-	margin: 0 auto;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-}
-
-#ID_Alp td, #ID_Other td{
-	width: 33%;
-	height: 25px;
-}
-
-#Left {
-	width: 20%;
-	height: 99%;
-	position: absolute;
-	text-align: center;
-	font-size: 20px;
-	color: #112F41;
-	background-color: #4FB99F;
-	top: 0px;
-	left: 0px;
-	overflow-y: scroll;
-}
-
-#Main{
-	width: 80%;
-	height: 95%;
-	float: right;
-	text-align: center;
-}
-
-#Main img{
-	height: 100%;
-}
-
-#Main h1{
-	margin: 20px;
-	text-shadow:4px 4px 3px #ED553B;
-}
-
-#Main textarea{
-	width: 80%;
-	height: 35%;
-	background-color: #F2B134;
-	font-size: 18px;
-}
-
-#footer{
-	position: fixed; 
-	bottom:2px; 
-	right:5px; 
-	color:#112F41;
-}
-
-#Button {
-	position: relative;
-	color: rgba(255,255,255,1);
-	text-decoration: none;
-	background-color: rgba(219,87,5,1);
-	font-family: 'Yanone Kaffeesatz';
-	font-weight: 700;
-	font-size: 2em;
-	padding: 4px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	-webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-	-moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-	box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-	margin: 10px 0 30px 0;
-	width: 160px;
-	text-align: center;
-	
-	-webkit-transition: all .1s ease;
-	-moz-transition: all .1s ease;
-	-ms-transition: all .1s ease;
-	-o-transition: all .1s ease;
-	transition: all .1s ease;
-}
-
-#Button:active {
-	-webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-	-moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-	box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
-	position: relative;
-	top: 6px;
-}
-
-</style>
 </body>
 </html>
