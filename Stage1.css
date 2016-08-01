@@ -1,3 +1,4 @@
+/* main style */
 html, body{
 	background-color: #4FB99F !important;
 	margin: 0 auto;
@@ -10,7 +11,13 @@ html, body{
 	margin: 0 auto;
 }
 
-/* alpha table */
+h1{
+	text-align: center;
+	margin: 20px;
+	text-shadow:4px 4px 3px #ED553B;
+}
+
+/* translate table */
 table.table-trans > tbody > tr > td {
 	border: none;
 	text-align: center;
@@ -32,12 +39,7 @@ table.table-trans > tbody > tr > td > input {
 	background-color: rgba(255,255,255,.3);
 }
 
-h1{
-	text-align: center;
-	margin: 20px;
-	text-shadow:4px 4px 3px #ED553B;
-}
-
+/* step3: main area */
 #Main{
 	height: 95%;
 	text-align: center;
@@ -93,5 +95,29 @@ h1{
 	box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
 	position: relative;
 	top: 6px;
+}
+
+/* bar chart */
+.bar {
+	fill: steelblue;
+}
+
+.bar:hover {
+	fill: brown;
+}
+
+.axis {
+	font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
 }
 
