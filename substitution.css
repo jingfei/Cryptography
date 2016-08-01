@@ -17,6 +17,28 @@ h1{
 	text-shadow:4px 4px 3px #ED553B;
 }
 
+body > h2{ color: #e03215; }
+
+body textarea{
+	width: 90%;
+	height: 250px;
+	margin: 0 3%;
+	background-color: rgba(255,255,255,.3);
+	font-size: 18px;
+	border-radius: 5px;
+	border: 1px solid #068587;
+}
+
+body > .btn-circle {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 15px;
+	border-radius: 20px;
+	float: right;
+}
+
 /* translate table */
 table.table-trans > tbody > tr > td {
 	border: none;
@@ -39,28 +61,11 @@ table.table-trans > tbody > tr > td > input {
 	background-color: rgba(255,255,255,.3);
 }
 
-/* step3: main area */
-#Main{
-	height: 95%;
-	text-align: center;
-}
-
-#Main img{
-	height: 100%;
-}
-
-#Main textarea{
-	width: 80%;
-	height: 35%;
-	background-color: #F2B134;
-	font-size: 18px;
-}
-
-#footer{
-	position: fixed; 
-	bottom:2px; 
-	right:5px; 
-	color:#112F41;
+/* step3: text area */
+#step3 > div {
+	font-size:20px;
+	font-weight:bold;
+	text-align:left;
 }
 
 #Button {
@@ -72,21 +77,16 @@ table.table-trans > tbody > tr > td > input {
 	font-weight: 700;
 	font-size: 2em;
 	padding: 4px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 	border-radius: 8px;
-	-webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-	-moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
 	box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
-	margin: 10px 0 30px 0;
+	margin: 10px auto 30px;
 	width: 160px;
 	text-align: center;
-	
 	-webkit-transition: all .1s ease;
-	-moz-transition: all .1s ease;
-	-ms-transition: all .1s ease;
-	-o-transition: all .1s ease;
-	transition: all .1s ease;
+		 -moz-transition: all .1s ease;
+			-ms-transition: all .1s ease;
+			 -o-transition: all .1s ease;
+					transition: all .1s ease;
 }
 
 #Button:active {
@@ -97,13 +97,16 @@ table.table-trans > tbody > tr > td > input {
 	top: 6px;
 }
 
+/* result */
+.result { display: none; }
+
 /* bar chart */
 .bar {
-	fill: steelblue;
+	fill: #F2B134;
 }
 
 .bar:hover {
-	fill: brown;
+	fill: #ED553B;
 }
 
 .axis {
@@ -121,3 +124,10 @@ table.table-trans > tbody > tr > td > input {
 	display: none;
 }
 
+/* footer */
+#footer{
+	position: fixed; 
+	bottom:2px; 
+	right:5px; 
+	color:#112F41;
+}

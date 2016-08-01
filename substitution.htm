@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="substitution.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<title>Cryptography</title>
+</head>
+<body>
+<button type="button" class="btn btn-warning btn-circle" onClick="location.href='./index.htm'"><i class="glyphicon glyphicon-home"></i></button>
+<h1>Substitution</h1>
+<h2>Step 1:</h2>
+<div class="content">
+	<form class="form-inline" role="form" style="margin:10px 0">
+		<div class="form-group">
+			<label for="code" style="font-size:20px;vertical-align:middle">code: </label>
+			<input id="code" class="form-control" style="vertical-align:middle;background:rgba(255,255,255,.3);font-size:18px"/>
+		</div>
+	</form>
+	<table class="table table-condensed table-trans">
+		<tr><td>a</td> <td>b</td> <td>c</td> <td>d</td> <td>e</td>
+				<td>f</td> <td>g</td> <td>h</td> <td>i</td> <td>j</td>
+				<td>k</td> <td>l</td> <td>m</td> <td>n</td> <td>o</td>
+				<td>p</td> <td>q</td> <td>r</td> <td>s</td> <td>t</td>
+				<td>u</td> <td>v</td> <td>w</td> <td>x</td> <td>y</td>
+				<td>z</td> </tr>
+		<tr><td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
+				<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
+				<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
+				<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
+				<td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td> <td>&#8595;</td>
+				<td>&#8595;</td> </tr>
+		<tr><td id="a97">A</td> <td id="a98">B</td> <td id="a99">C</td> 
+				<td id="a100">D</td> <td id="a101">E</td>
+				<td id="a102">F</td> <td id="a103">G</td> <td id="a104">H</td> 
+				<td id="a105">I</td> <td id="a106">J</td>
+				<td id="a107">K</td> <td id="a108">L</td> <td id="a109">M</td> 
+				<td id="a110">N</td> <td id="a111">O</td>
+				<td id="a112">P</td> <td id="a113">Q</td> <td id="a114">R</td> 
+				<td id="a115">S</td> <td id="a116">T</td>
+				<td id="a117">U</td> <td id="a118">V</td> <td id="a119">W</td> 
+				<td id="a120">X</td> <td id="a121">Y</td>
+				<td id="a122">Z</td> </tr>
+	</table>
+</div>
+<h2>Step 2:</h2>
+<div class="content">
+	<table class="table table-condensed table-trans" id="table-other1"></table>
+	<table class="table table-condensed table-trans" id="table-other2"></table>
+</div>
+<h2>Step 3:</h2>
+<div class="content" id="step3">
+	<div>Put original text here:</div>
+	<textarea id="Input" placeholder="Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs..."></textarea>
+</div>
+<div class="content" style="text-align:center">
+	<button id="Button" onClick="Convert();">convert</button>
+</div>
+<h2 class="result">Result:</h2>
+<div class="content result" id="result">
+	<textarea id="Output" readonly></textarea>
+	<div id="barChart"></div>
+</div>
+<div id="footer">
+	Designed by Jer-Nan, Jingfei
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="substitution.js"></script>
+</body>
+</html>

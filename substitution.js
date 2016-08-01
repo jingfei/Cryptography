@@ -28,38 +28,19 @@ String.prototype.replaceAt = function(index, character){
 
 function Convert(){
 	var input = $('#Input').val();
-	var $Ans = input;
-	if(!input) return;
+	var output = input;
+	if(!input){ 
+		alert("Please enter step 3's text.");
+		return;
+	}
+	$('.result').show();
+	$('html, body').animate({
+		scrollTop: $("#result").offset().top
+	}, 1000);
 	/* change all input to lower-alpha */
 	input = input.toLowerCase();
 	$('#Input').val(input);
 	/***********************************/
-
-	/* show frequency chart */
-	var data = [];
-	var total = input.length;
-	var i = 97;
-	while(true){
-		var ch = String.fromCharCode(i);
-		var tmp_ch = ch;
-		if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?")
-			tmp_ch = "\\" + ch;
-		var count = (input.match(new RegExp(tmp_ch,"g")) || []).length; 
-		if(count !== 0) {
-			if(i>=97 && i<=122) ch=String.fromCharCode(i-(97-65));
-			data.push({alph:ch, frequency: count/total});
-		}
-
-		/* change the sequence of alph in chart */
-		i++;
-		if(i===122) i=48;
-		else if(i===58) i=33;
-		else if(i===48) i=58;
-		else if(i===65) i=91;
-		else if(i===97) i=122;
-		else if(i===127) break;
-	}
-	showChart(data);
 
 	/* convert to result */
 	for($i=33; $i<127; $i++){
@@ -70,12 +51,35 @@ function Convert(){
 			$Before = "\\" + $Before;
 		$n = input.search($Before);
 		while($n!=-1){
-			$Ans = $Ans.replaceAt($n,$After);
+			output = output.replaceAt($n,$After);
 			input = input.replaceAt($n," ");
 			$n = input.search($Before);
 		}
 	}
-	$('#Output').val($Ans);
+	$('#Output').val(output);
+
+	/* show frequency chart */
+	var data = [];
+	var total = output.length;
+	var i = 65;
+	while(true){
+		var ch = String.fromCharCode(i);
+		var tmp_ch = ch;
+		if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?")
+			tmp_ch = "\\" + ch;
+		var count = (output.match(new RegExp(tmp_ch,"g")) || []).length; 
+		if(count !== 0) data.push({alph:ch, frequency: count/total});
+
+		/* change the sequence of alph in chart */
+		i++;
+		if(i===91) i=48;
+		else if(i===58) i=33;
+		else if(i===48) i=58;
+		else if(i===65) i=91;
+		else if(i===97) i=123;
+		else if(i===127) break;
+	}
+	showChart(data);
 }
 
 function alphRenew(val){
@@ -135,8 +139,8 @@ function buildOtherTable(){
 /* frequency */
 function showChart(data){
 	$("#barChart").html("");
-	var margin = {top: 20, right: 20, bottom: 30, left: 40},
-		width = $("#Main").width()*.9 - margin.left - margin.right,
+	var margin = {top: 20, right: 20, bottom: 80, left: 40},
+		width = $("#result").width()*.9 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 	
 	var x = d3.scale.ordinal()
