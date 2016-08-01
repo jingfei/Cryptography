@@ -1,6 +1,25 @@
+var alph = [];
+for(var i = 0; i<26; ++i) alph[i] = false;
+
 $(document).ready(function(){
 	$('#ID_Alp').html(ForAuto(1));
 	$('#ID_Other').html(ForManual(3));
+});
+
+$('#code').keydown( function(event){
+	// keycode: 8->backspace, 65->a, 90->z
+	if(event.which !== 8 && (event.which < 65 || event.which >90) )
+		event.preventDefault();
+	if(alph[event.which-65]===true) return false;
+});
+
+$('#code').keyup( function(event){
+	// keycode: 8->backspace, 65->a, 90->z
+	if(event.which !== 8 && (event.which < 65 || event.which >90) )
+		return false;
+	if(event.which !== 8 && alph[event.which-65]===true) return false;
+	this.value = this.value.toUpperCase();
+	alphRenew(this.value);
 });
 
 $('input[name=Choice_Alp]:radio').change(
@@ -127,3 +146,20 @@ function ForManual(Choice){
 	return Inner;
 }
 
+function alphRenew(val){
+	/* init */
+	var len = val.length;
+	var lastAlph = len===0 ? 65 : val.charCodeAt(len-1)+1;
+	for(var i=0; i<26; ++i) alph[i]=false;
+	/* handle code alph */
+	for(var i=0; i<len; ++i) {
+		alph[val.charCodeAt(i)-65] = true;
+		$('#a'+(i+1)).html(val.substring(i,i+1));
+	}
+	/* handle other alphs */
+	for(var i=len+1, j=lastAlph; i<=26; ++i,++j) {
+		if(j>90) j=65;
+		while(alph[j-65]===true) ++j;
+		$('#a'+i).html(String.fromCharCode(j));
+	}
+}
