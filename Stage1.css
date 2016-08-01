@@ -1,7 +1,13 @@
 html, body{
 	background-color: #4FB99F !important;
-	width: 100%;
+	margin: 0 auto;
+	width: 97%;
 	height: 100%;
+}
+
+.content {
+	width: 95%;
+	margin: 0 auto;
 }
 
 /* alpha table */
