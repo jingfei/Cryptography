@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" type="text/css" href="Vigenere.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<title>Cryptography</title>
+</head>
+<body>
+<button type="button" class="btn btn-warning btn-circle" onClick="location.href='./index.htm'"><i class="glyphicon glyphicon-home"></i></button>
+<h1>Vigenère cipher</h1>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="row">
+			<h4 class="col-sm-2">Key:</h4>
+			<div class="col-sm-10"><input type="text" class="form-control input" id="key"></div>
+		</div>
+		<div class="row">
+			<h4 class="col-sm-2">Code: </h4>
+			<div class="col-sm-10"><textarea id="code"></textarea></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6"><button class="Button" onClick="Encode();">encode</button></div>
+			<div class="col-sm-6"><button class="Button" onClick="Decode();">decode</button></div>
+		</div>
+		<div class="row">
+			<h4 class="col-sm-2">Result: </h4>
+			<div class="col-sm-10"><textarea id="result"></textarea></div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<table class="table table-condensed" id="transTable"></table>
+	</div>
+</div>
+<div id="footer">
+	Designed by Jer-Nan, Jingfei
+</div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="Vigenere.js"></script>
+</body>
+</html>
+
