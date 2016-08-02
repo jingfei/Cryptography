@@ -6,14 +6,14 @@ $(document).ready(function(){
 	buildOtherTable();
 });
 
-$(document).on('keydown','#code',function(event){
+$('#code').keydown( function(event){
 	// keycode: 8->backspace, 65->a, 90->z
 	if(event.which !== 8 && (event.which < 65 || event.which >90) )
 		event.preventDefault();
-	if(alph[event.which-65]===true) return false;
+	else if(alph[event.which-65]===true) return false;
 });
 
-$(document).on('keyup', '#code', function(event){
+$('#code').keyup( function(event){
 	// keycode: 8->backspace, 65->a, 90->z
 	if(event.which !== 8 && (event.which < 65 || event.which >90) )
 		return false;

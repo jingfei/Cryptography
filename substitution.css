@@ -18,6 +18,7 @@ table.table-trans > tbody > tr > td > input {
 	width: 100%;
 	text-align: center;
 	background-color: rgba(255,255,255,.3);
+	text-transform: uppercase;
 }
 
 /* step3: text area */
