@@ -1,12 +1,12 @@
 $(document).ready(function(){
-	ShowTable();
+	buildTable();
 	$("#first").keyup(function(event){
-		/* TODO: change table~ */
-		console.log(event.which);
+		if(event.which>=65 && event.which<=90)
+			changeTable(event.which-65);
 	});
 });
 
-function ShowTable(){
+function buildTable(){
 	var Table="";
 	Table += "<tr><th></th>";
 	for($i=0; $i<26; ++$i)
@@ -27,6 +27,23 @@ function ShowTable(){
 		Table += "</tr>";
 	}
 	$("#transTable").html(Table);
+}
+
+function changeTable(add){
+	for($i=0; $i<26; ++$i){
+		for($j=$i, $k=0; $k<26; ++$j, ++$k){
+			if($j>=26) $j=0;
+			if($j===0 && $i===0){
+				$("#first").val(String.fromCharCode(add+65));
+				continue;
+			}
+			var Classc = "c"+String.fromCharCode($k+65);
+			var Classr = "r"+String.fromCharCode($i+65);
+			var evt = $("."+Classc+"."+Classr).first();
+			var val = $k+$i+add > 25 ? ($k+$i+add)%26 : $k+$i+add;
+			evt.html(String.fromCharCode(val+65));
+		}
+	}
 }
 
 function ExtendKey($Key, $Code){
@@ -117,5 +134,4 @@ function Color($Key, $LongKey, $Before){
 		if(isalpha($Before[$i]))
 			$(".r"+$LongKey[$i]+".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
 }
-
 
