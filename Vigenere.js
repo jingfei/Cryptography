@@ -1,8 +1,12 @@
+var add = 0;
+
 $(document).ready(function(){
 	buildTable();
 	$("#first").keyup(function(event){
-		if(event.which>=65 && event.which<=90)
-			changeTable(event.which-65);
+		if(event.which>=65 && event.which<=90){
+			add = event.which - 65;
+			changeTable();
+		}
 	});
 });
 
@@ -29,8 +33,8 @@ function buildTable(){
 	$("#transTable").html(Table);
 }
 
-function changeTable(add){
-	for($i=0; $i<26; ++$i){
+function changeTable(){
+	for($i=0; $i<26; ++$i)
 		for($j=$i, $k=0; $k<26; ++$j, ++$k){
 			if($j>=26) $j=0;
 			if($j===0 && $i===0){
@@ -43,7 +47,6 @@ function changeTable(add){
 			var val = $k+$i+add > 25 ? ($k+$i+add)%26 : $k+$i+add;
 			evt.html(String.fromCharCode(val+65));
 		}
-	}
 }
 
 function ExtendKey($Key, $Code){
@@ -85,13 +88,10 @@ function Encode(){
 	$LongKey = ExtendKey($Key, $Code);
 	$Ans = "";
 	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])){
-			$Ans += $Code[$i];
-			continue;
-		}
+		if(!isalpha($Code[$i])) continue;  // filter the char not alpha
 		var $tmp = $LongKey.charCodeAt($i)-65;
 		$tmp += $Code.charCodeAt($i)-97;
-		if($tmp >= 26) $tmp-=26;
+		$tmp = ($tmp+add)%26;
 		$Ans += String.fromCharCode($tmp+65);
 	}
 	$("#result").val($Ans);
@@ -106,13 +106,11 @@ function Decode(){
 	$LongKey = ExtendKey($Key, $Code);
 	$Ans = "";
 	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])){
-			$Ans += $Code[$i];
-			continue;
-		}
+		if(!isalpha($Code[$i])) continue; // filter the char not alpha
 		var $tmp = $LongKey.charCodeAt($i)-65;
 		$tmp = $Code.charCodeAt($i)-65-$tmp;
-		if($tmp < 0) $tmp+=26;
+		$tmp -= add;
+		while($tmp < 0) $tmp+=26;
 		$Ans += String.fromCharCode($tmp+97);
 	}
 	$("#result").val($Ans);
