@@ -30,6 +30,10 @@ table.table-trans > tbody > tr > td > input {
 
 /* result */
 .result { display: none; }
+#result-label {
+	margin-left: 3%;
+	font-size: 20px;
+}
 
 /* bar chart */
 .bar {

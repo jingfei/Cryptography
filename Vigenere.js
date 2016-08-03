@@ -74,27 +74,25 @@ function ExtendKey($Key, $Code){
 	return $LongKey;
 }
 
-function isalpha($c){
-	if($c.charCodeAt(0)>=65 && $c.charCodeAt(0)<=90) return true;
-	if($c.charCodeAt(0)>=97 && $c.charCodeAt(0)<=122) return true;
-	return false;
-}
-
 function Encode(){
 	$Key = $("#key").val();
 	$Code = $("#code").val();
 	$Code = $Code.toLowerCase();
 	$("#code").val($Code);
 	$LongKey = ExtendKey($Key, $Code);
-	$Ans = "";
+	output = "";
+	$('.filter').prop('checked', true);
 	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])) continue;  // filter the char not alpha
+		if(!isalpha($Code[$i])){ // filter the char not alpha
+			output += $Code[$i];
+			continue;  
+		}
 		var $tmp = $LongKey.charCodeAt($i)-65;
 		$tmp += $Code.charCodeAt($i)-97;
 		$tmp = ($tmp+add)%26;
-		$Ans += String.fromCharCode($tmp+65);
+		output += String.fromCharCode($tmp+65);
 	}
-	$("#result").val($Ans);
+	$("#resultText").val(output);
 	Color($Key, $LongKey, $Code);
 }
 
@@ -104,17 +102,21 @@ function Decode(){
 	$Code = $Code.toUpperCase();
 	$("#code").val($Code);
 	$LongKey = ExtendKey($Key, $Code);
-	$Ans = "";
+	output = "";
+	$('.filter').prop('checked', true);
 	for($i=0; $i<$Code.length; ++$i){
-		if(!isalpha($Code[$i])) continue; // filter the char not alpha
+		if(!isalpha($Code[$i])){ // filter the char not alpha
+			output += $Code[$i];
+			continue;  
+		}
 		var $tmp = $LongKey.charCodeAt($i)-65;
 		$tmp = $Code.charCodeAt($i)-65-$tmp;
 		$tmp -= add;
 		while($tmp < 0) $tmp+=26;
-		$Ans += String.fromCharCode($tmp+97);
+		output += String.fromCharCode($tmp+97);
 	}
-	$("#result").val($Ans);
-	Color($Key, $LongKey, $Ans);
+	$("#resultText").val(output);
+	Color($Key, $LongKey, output);
 }
 
 function Color($Key, $LongKey, $Before){

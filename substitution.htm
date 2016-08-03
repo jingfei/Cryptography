@@ -58,7 +58,12 @@
 </div>
 <h2 class="result">Result:</h2>
 <div class="content result" id="result">
-	<textarea id="Output" style="margin:0 3%;" readonly></textarea>
+	<div id="result-label">
+		<label class="checkbox-inline"><input type="checkbox" class="filter" name="blank" checked>Blank</label>
+		<label class="checkbox-inline"><input type="checkbox" class="filter" name="num" checked>Number</label>
+		<label class="checkbox-inline"><input type="checkbox" class="filter" name="punc" checked>Punctuation</label>
+	</div>
+	<textarea id="resultText" style="margin:0 3%;" readonly></textarea>
 	<div id="barChart"></div>
 </div>
 <div id="footer">
@@ -68,6 +73,7 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="//d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="common.js"></script>
 <script type="text/javascript" src="substitution.js"></script>
 </body>
 </html>

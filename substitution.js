@@ -28,7 +28,8 @@ String.prototype.replaceAt = function(index, character){
 
 function Convert(){
 	var input = $('#Input').val() || "Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs...";
-	var output = input;
+	output = input;
+	$('.filter').prop('checked', true);
 	$('.result').show();
 	$('html, body').animate({
 		scrollTop: $("#result").offset().top
@@ -52,7 +53,7 @@ function Convert(){
 			$n = input.search($Before);
 		}
 	}
-	$('#Output').val(output);
+	$('#resultText').val(output);
 
 	/* show frequency chart */
 	var data = [];
