@@ -64,7 +64,7 @@ function Convert(){
 		if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?")
 			tmp_ch = "\\" + ch;
 		var count = (output.match(new RegExp(tmp_ch,"g")) || []).length; 
-		if(count !== 0) data.push({alph:ch, frequency: count/total});
+		if(count !== 0) data.push({alph:ch, frequency: count/total, count: count});
 
 		/* change the sequence of alph in chart */
 		i++;
@@ -187,6 +187,16 @@ function showChart(data){
 			.attr("width", x.rangeBand())
 			.attr("y", function(d) { return y(d.frequency); })
 			.attr("height", function(d) { return height - y(d.frequency); });
+
+	svg.selectAll("label")
+			.data(data)
+			.enter().append("text")
+			.text(function(d){ return d.count; })
+			.attr("x", function(d, i){ return x(d.alph)+x.rangeBand()/2; })
+			.attr("y", function(d){ return y(d.frequency)+10; })
+			.attr("class", "label")
+			.attr("text-anchor", "middle")
+			.attr("fill", "#068587");
 }
 
 function type(d) {
