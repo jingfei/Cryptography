@@ -58,7 +58,8 @@ function showChart(){
 
 		/* change the sequence of alph in chart */
 		i++;
-		if(i===91) i=48;
+		if(i===91) i=97;
+		else if(i===123) i=48;
 		else if(i===58) i=33;
 		else if(i===48) i=58;
 		else if(i===65) i=91;
