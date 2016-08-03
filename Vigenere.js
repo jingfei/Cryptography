@@ -94,6 +94,7 @@ function Encode(){
 	}
 	$("#resultText").val(output);
 	Color($Key, $LongKey, $Code);
+	showChart();
 }
 
 function Decode(){
@@ -117,6 +118,7 @@ function Decode(){
 	}
 	$("#resultText").val(output);
 	Color($Key, $LongKey, output);
+	showChart();
 }
 
 function Color($Key, $LongKey, $Before){

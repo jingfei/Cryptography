@@ -84,3 +84,27 @@ body > .btn-circle {
 	top: 6px;
 }
 
+/* bar chart */
+.bar {
+	fill: #F2B134;
+}
+
+.bar:hover {
+	fill: #ED553B;
+}
+
+.axis {
+	font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
+}
+
