@@ -52,7 +52,7 @@ function changeTable(){
 function ExtendKey($Key, $Code){
 	/* return Table background color */
 	for($i=0; $i<26; ++$i)
-		$(".r"+String.fromCharCode($i+65)).css({"backgroundColor":"transparent"});
+		$(".r"+String.fromCharCode($i+65)).removeClass("color");
 
 	/* key to upper case and renew */
 	$Key = $Key.toUpperCase();
@@ -124,16 +124,21 @@ function Decode(){
 function Color($Key, $LongKey, $Before){
 	/* different Table color for key row */
 	for($i=0; $i<$Key.length; ++$i)
-		$(".r"+$Key[$i]).css({"backgroundColor":"#06B587"});
+		$(".r"+$Key[$i]).addClass("color");
 	
-	/* different color for Before code */
-	for($i=0; $i<$Before.length; ++$i)
-		if(isalpha($Before[$i]))
-			$(".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#06B587"});
-
 	/* different color for target code */
 	for($i=0; $i<$Before.length; ++$i)
 		if(isalpha($Before[$i]))
 			$(".r"+$LongKey[$i]+".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
+}
+
+Element.prototype.removeClass = function(name) {
+  this.className = this.className.replace(new RegExp('(?:^|\\s)' + name + '(?:\\s|$)'), ' ');
+  return this;
+};
+
+Element.prototype.addClass = function(name) {
+  this.className += (" "+name);
+  return this;
 }
 
