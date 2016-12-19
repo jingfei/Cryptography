@@ -8,11 +8,21 @@ $(document).ready(function(){
 			changeTable();
 		}
 	});
+
+  $("#firstRow").on('click',function(emt){
+    var $alph = emt.target.innerHTML;
+	  /* toggle different color for column */
+		if(isalpha($alph)) {
+			var tar = $(".c"+$alph.toUpperCase());
+      if(tar.hasClass("color")) tar.removeClass("color");
+      else tar.addClass("color");
+    }
+  });
 });
 
 function buildTable(){
 	var Table="";
-	Table += "<tr><th></th>";
+	Table += "<tr id='firstRow'><th></th>";
 	for($i=0; $i<26; ++$i)
 		Table += "<th>"+String.fromCharCode($i+97)+"</th>";
 	Table += "</tr>";
@@ -140,5 +150,9 @@ Element.prototype.removeClass = function(name) {
 Element.prototype.addClass = function(name) {
   this.className += (" "+name);
   return this;
+}
+
+Element.prototype.hasClass = function(name) {
+  return this.className.indexOf(name)!==-1;
 }
 

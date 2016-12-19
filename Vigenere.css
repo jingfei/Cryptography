@@ -21,6 +21,10 @@
 	text-transform:uppercase;
 }
 
+#transTable tr#firstRow {
+  cursor: pointer;
+}
+
 #transTable td.color {
   animation-name: color-animation;
   animation-duration: 1000ms;
