@@ -14,8 +14,8 @@ $(document).ready(function(){
 	  /* toggle different color for column */
 		if(isalpha($alph)) {
 			var tar = $(".c"+$alph.toUpperCase());
-      if(tar.hasClass("color")) tar.removeClass("color");
-      else tar.addClass("color");
+      if(tar.hasClass("colorCol")) tar.removeClass("colorCol");
+      else tar.addClass("colorCol");
     }
   });
 });
@@ -61,8 +61,9 @@ function changeTable(){
 
 function ExtendKey($Key, $Code){
 	/* return Table background color */
-	for($i=0; $i<26; ++$i)
-		$(".r"+String.fromCharCode($i+65)).removeClass("color");
+  $(".colorCol").removeClass("colorCol");
+  $(".colorRow").removeClass("colorRow");
+  $(".target").removeClass("target");
 
 	/* key to upper case and renew */
 	$Key = $Key.toUpperCase();
@@ -76,11 +77,6 @@ function ExtendKey($Key, $Code){
 		else
 			$LongKey += $Code[$i];
 	}
-/*	
-	while($LongKey.length < $Code.length) $LongKey += $Key;
-	if($LongKey.length > $Code.length) 
-		$LongKey = $LongKey.substr(0,$Code.length);
-*/
 	return $LongKey;
 }
 
@@ -132,14 +128,16 @@ function Decode(){
 }
 
 function Color($Key, $LongKey, $Before){
+  console.log($Key);
+  console.log($LongKey);
 	/* different Table color for key row */
 	for($i=0; $i<$Key.length; ++$i)
-		$(".r"+$Key[$i]).addClass("color");
+		$(".r"+$Key[$i].toUpperCase()).addClass("colorRow");
 	
 	/* different color for target code */
 	for($i=0; $i<$Before.length; ++$i)
 		if(isalpha($Before[$i]))
-			$(".r"+$LongKey[$i]+".c"+$Before[$i].toUpperCase()).css({"backgroundColor":"#ED553B"});
+			$(".r"+$LongKey[$i]+".c"+$Before[$i].toUpperCase()).addClass("target");
 }
 
 Element.prototype.removeClass = function(name) {
