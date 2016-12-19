@@ -17,17 +17,24 @@ $('input[name="blank"],input[name="num"],input[name="punc"]').change( function()
 		var tmp="", len=res.length;
 		for(var i=0; i<len; ++i)
 			if(isalpha(res[i]) || isnum(res[i]) 
-				|| res[i]===" " || res[i]==="\n" || res[i]==="\r" || res[i]==="\t")
+				|| res[i]===" " || res[i]==="\n" || res[i]==="\r" || res[i]==="\t") {
 				tmp+=res[i];
+        ++punctuation;
+      }
 		res = tmp;
 	}
 	if(!$('input[name="num"]').is(":checked")) {
 		var tmp="", len=res.length;
 		for(var i=0; i<len; ++i)
-			if(!isnum(res[i]))
+			if(!isnum(res[i])) {
 				tmp+=res[i];
+        ++num;
+      }
 		res = tmp;
 	}
+  for(var i=0; i<len; ++i)
+    if(!isalpha(res[i]))
+      ++alph;
 	$("#resultText").val(res);
 });
 
@@ -47,14 +54,20 @@ function showChart(){
 	/* calculate data */
 	var data = [];
 	var total = output.length;
+  var num=0, punctuation=0, alph=0;
 	var i = 65;
 	while(true){
 		var ch = String.fromCharCode(i);
 		var tmp_ch = ch;
-		if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?")
+		if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?") 
 			tmp_ch = "\\" + ch;
 		var count = (output.match(new RegExp(tmp_ch,"g")) || []).length; 
-		if(count !== 0) data.push({alph:ch, frequency: count/total, count: count});
+		if(count !== 0) {
+      data.push({ alph:ch, frequency: count/total, count: count });
+		  if(ch=="(" || ch==")" || ch=="[" || ch=="{" || ch=="*" || ch=="+" || ch=="." || ch=="$" || ch=="^" || ch=="\\" || ch=="|" || ch=="?") punctuation+=count;
+      else if(isnum(ch)) num+=count;
+      else alph+=count;
+    }
 
 		/* change the sequence of alph in chart */
 		i++;
@@ -95,6 +108,15 @@ function showChart(){
 	
 	x.domain(data.map(function(d) { return d.alph; }));
 	y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+  svg.append("text")
+      .data(data)
+      .attr("x", margin.left*5)
+      .attr("y", 0 - (margin.top / 2))
+      .attr("text-anchor", "middle")
+      .style("font-size", "14px")
+      .text(function(d){
+        return "Total Alphbat: "+alph+",  Total Punctuation: "+punctuation + ",  Total Number: "+num;});
 	
 	svg.append("g")
 			.attr("class", "x axis")
