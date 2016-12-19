@@ -123,7 +123,7 @@ function showChart(){
 	svg.selectAll("label")
 			.data(data)
 			.enter().append("text")
-			.text(function(d){ return d.frequency.toFixed(2); })
+			.text(function(d){ return (d.frequency*100).toFixed(1); })
 			.attr("x", function(d, i){ return x(d.alph)+x.rangeBand()/2; })
 			.attr("y", function(d){ return y(d.frequency)+10; })
 			.attr("class", "label")
