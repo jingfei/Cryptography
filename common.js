@@ -111,9 +111,9 @@ function showChart(){
 
   svg.append("text")
       .data(data)
-      .attr("x", margin.left*5)
+      .attr("x", margin.left)
       .attr("y", 0 - (margin.top / 2))
-      .attr("text-anchor", "middle")
+      .attr("text-anchor", "left")
       .style("font-size", "14px")
       .text(function(d){
         return "Total Alphbat: "+alph+",  Total Punctuation: "+punctuation + ",  Total Number: "+num;});
