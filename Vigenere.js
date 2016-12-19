@@ -18,7 +18,7 @@ function buildTable(){
 	Table += "</tr>";
 	for($i=0; $i<26; ++$i){
 		Table += "<tr>";
-		Table += "<th>"+String.fromCharCode($i+65)+"</th>";
+		Table += "<th>"+($i+1)+"</th>";
 		for($j=$i, $k=0; $k<26; ++$j, ++$k){
 			if($j>=26) $j=0;
 			var Classc = "c"+String.fromCharCode($k+65);
