@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<title>Brute-force Check</title>
+</head>
+<body>
+<button type="button" class="btn btn-warning btn-circle" onClick="location.href='./index.htm'"><i class="glyphicon glyphicon-home"></i></button>
+<h1>Brute-force Check</h1>
+<h2>Step 1:</h2>
+<div class="content">
+	<form class="form-inline" role="form" style="margin:10px 0" onsubmit="getTime(); return false;">
+		<div class="form-group">
+			<label for="code" style="font-size:20px;vertical-align:middle">number of letters (range: 1~9): </label>
+			<input id="code" class="input form-control" style="width:70px" max='9' min='1' type="number" value="7" onblur="check()" />
+		</div>
+	</form>
+</div>
+<h2>Step 2:</h2>
+<div class="content">
+	<table class="table table-condensed table-trans" id="table-other1"></table>
+	<table class="table table-condensed table-trans" id="table-other2"></table>
+</div>
+<h2>Step 3:</h2>
+<div class="content">
+	<button class="Button" onClick="getTime();">get time</button>
+	<button class="Button" onClick="printOut();">print out</button>
+</div>
+<h2 class="result">Result:</h2>
+<div class="content result" id="result">
+  <h1 id="resultTime">0.001 seconds </h1>
+	<textarea id="Input" style="margin:0 3%;" readonly></textarea>
+</div>
+<div id="footer">
+	Designed by Jer-Nan, Jingfei
+</div>
+<style>
+  .result { display: none; }
+</style>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="./brute-force.js"></script>
+</body>
+</html>

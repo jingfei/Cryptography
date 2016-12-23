@@ -113,32 +113,3 @@ function buildOtherTable(){
 	$("#table-other2").html(inner);
 }
 
-function findMatching(N,print){
-  if( typeof(print) === "undefined" ) print = false;
-  var ar = new Array();
-  for(var i=0; i<N; ++i) ar.push(i);
-  var time1 = new Date();
-  permutation(ar,[],print);
-  var time2 = new Date();
-  console.log("Duration: "+(time2-time1)+" milliseconds");
-}
-
-function permutation(ar,prefix,print) {
-  var N=ar.length;
-  if(N === 2) {
-    var ar2=[ar[1],ar[0]];
-    if(print!==false) {
-      console.log(prefix.concat(ar));
-      console.log(prefix.concat(ar2));
-    }
-  }
-  else {
-    for(var i=0; i<N; ++i) {
-      var elm = ar[i];
-      ar.splice(i,1);
-      permutation(ar,prefix.concat(elm),print);
-      ar.splice(i,0,elm);
-    }
-  }
-}
-
