@@ -113,3 +113,26 @@ function buildOtherTable(){
 	$("#table-other2").html(inner);
 }
 
+function findMatching(N){
+  var ar = new Array();
+  for(var i=0; i<N; ++i) ar.push(i);
+  permutation(ar,[]);
+}
+
+function permutation(ar,prefix) {
+  var N=ar.length;
+  if(N === 2) {
+    var ar2=[ar[1],ar[0]];
+    console.log(prefix.concat(ar));
+    console.log(prefix.concat(ar2));
+  }
+  else {
+    for(var i=0; i<N; ++i) {
+      var elm = ar[i];
+      ar.splice(i,1);
+      permutation(ar,prefix.concat(elm));
+      ar.splice(i,0,elm);
+    }
+  }
+}
+
