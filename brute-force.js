@@ -1,12 +1,14 @@
+var MAX = 26;
+
 function check(){
   var num = parseInt(document.getElementById("code").value);
-  if(num>9 || num<1) {
+  if(num>MAX || num<1) {
     alert("The number must be between 1 and 9.");
-    num = 5;
+    num = 7;
   }
-  else if(!(num>=1 && num<=9)) {
+  else if(!(num>=1 && num<=MAX)) {
     alert("Please input number.");
-    num = 5;
+    num = 7;
   }
   document.getElementById("code").value = num;
 }
