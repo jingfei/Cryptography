@@ -33,7 +33,7 @@ function printOut(){
 function findMatching(N,print){
   if( typeof(print) === "undefined" ) print = false;
   var ar = new Array();
-  for(var i=0; i<N; ++i) ar.push(i);
+  for(var i=0; i<N; ++i) ar.push(String.fromCharCode(i+65));
   var time1 = new Date();
   permutation(ar,[],print);
   var time2 = new Date();
