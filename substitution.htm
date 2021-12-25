@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="theme.css"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<link rel="stylesheet" type="text/css" href="substitution.css"/>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<title>Cryptography</title>
 </head>
 <body>
-<button type="button" class="btn btn-warning btn-circle" onClick="location.href='./index.htm'"><i class="glyphicon glyphicon-home"></i></button>
+<button type="button" class="btn btn-circle" onClick="location.href='./index.htm'"><i class="bi bi-house-door-fill"></i></button>
 <h1>Substitution</h1>
 <h2>Step 1:</h2>
 <div class="content">
 	<form class="form-inline" role="form" style="margin:10px 0">
 		<div class="form-group">
-			<label for="code" style="font-size:20px;vertical-align:middle">code: </label>
-			<input id="code" class="input form-control" style="text-transform:uppercase" maxlength='26' />
+			<label for="code" style="font-size:20px;vertical-align:middle;margin-right:5px">Code: </label>
+			<input id="code" class="input form-control" style="text-transform:uppercase;display:inline-block;width:220px" maxlength='26' />
 		</div>
 	</form>
 	<table class="table table-condensed table-trans">
@@ -50,18 +51,27 @@
 </div>
 <h2>Step 3:</h2>
 <div class="content" id="step3">
-	<div>Put original text here:</div>
+	<div>Input original text here:</div>
 	<textarea id="Input" placeholder="Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs. Pack my box with five dozen liquor jugs..." style="margin:0 3%;"></textarea>
 </div>
 <div class="content" style="text-align:center">
-	<button class="Button" onClick="Convert();">convert</button>
+	<button class="Button" onClick="Convert();">Convert</button>
 </div>
 <h2 class="result">Result:</h2>
 <div class="content result" id="result">
 	<div id="result-label">
-		<label class="checkbox-inline"><input type="checkbox" class="filter" name="blank" checked>Blank</label>
-		<label class="checkbox-inline"><input type="checkbox" class="filter" name="num" checked>Number</label>
-		<label class="checkbox-inline"><input type="checkbox" class="filter" name="punc" checked>Punctuation</label>
+		<div class="form-check form-switch">
+			<input type="checkbox" role="switch" class="form-check-input filter" name="blank" id="result-option-blank" checked>
+			<label class="form-check-label" for="result-option-blank">Blank</label>
+		</div>
+		<div class="form-check form-switch">
+			<input type="checkbox" role="switch" class="form-check-input filter" name="num" id="result-option-number" checked>
+			<label class="form-check-label" for="result-option-number">Number</label>
+		</div>
+		<div class="form-check form-switch">
+			<input type="checkbox" role="switch" class="form-check-input filter" name="punc" id="result-option-punc" checked>
+			<label class="form-check-label" for="result-option-punc">Punctuation</label>
+		</div>
 	</div>
 	<textarea id="resultText" style="margin:0 3%;" readonly></textarea>
 	<div id="barChart"></div>
@@ -71,7 +81,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="common.js"></script>
 <script type="text/javascript" src="substitution.js"></script>

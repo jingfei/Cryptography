@@ -1,0 +1,15 @@
+:root {
+	--color-dark-2: #05668D;
+	--color-dark-1: #028090;
+	--color-normal: #00A896;
+	--color-light-1: #02C39A;
+	--color-light-2: #F0F3BD;
+	/** Custom color */
+	--button-bg-color: var(--color-dark-1);
+	/** Override Boostrap default */
+	--bs-body-bg: var(--color-light-2);
+	--bs-body-color: var(--color-dark-2);
+	--bs-font-sans-serif: Roboto;
+	
+}
+

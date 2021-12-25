@@ -1,5 +1,8 @@
 /* result filter */
 var output = "";
+var num=0; 
+var punctuation=0; 
+var alph=0;
 
 $('input[name="blank"],input[name="num"],input[name="punc"]').change( function(){
 	var res = output;
@@ -32,7 +35,7 @@ $('input[name="blank"],input[name="num"],input[name="punc"]').change( function()
       }
 		res = tmp;
 	}
-  for(var i=0; i<len; ++i)
+  for(var i=0; i<res.length; ++i)
     if(!isalpha(res[i]))
       ++alph;
 	$("#resultText").val(res);
@@ -54,7 +57,11 @@ function showChart(){
 	/* calculate data */
 	var data = [];
 	var total = output.length;
-  var num=0, punctuation=0, alph=0;
+	/* init data */
+  	num=0; 
+	punctuation=0; 
+	alph=0;
+	/* chart */
 	var i = 65;
 	while(true){
 		var ch = String.fromCharCode(i);
@@ -79,8 +86,15 @@ function showChart(){
 		else if(i===97) i=123;
 		else if(i===127) break;
 	}
+	/* append text info */
+	$("#barChart").html(`
+		<div class="bar-chart-text">
+			<div>Total Alphabat: ${alph}</div>
+			<div>Total Number: ${num}</div>
+			<div>Total Punctuation: ${punctuation}</div>
+		</div>
+	`);
 	/* draw chart */
-	$("#barChart").html("");
 	var margin = {top: 20, right: 10, bottom: 80, left: 40},
 		width = $("#barChart").parent().width()*.9 - margin.left - margin.right,
 		height = 300 - margin.top - margin.bottom;
@@ -109,15 +123,6 @@ function showChart(){
 	x.domain(data.map(function(d) { return d.alph; }));
 	y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
-  svg.append("text")
-      .data(data)
-      .attr("x", margin.left)
-      .attr("y", 0 - (margin.top / 2))
-      .attr("text-anchor", "left")
-      .style("font-size", "14px")
-      .text(function(d){
-        return "Total Alphbat: "+alph+",  Total Punctuation: "+punctuation + ",  Total Number: "+num;});
-	
 	svg.append("g")
 			.attr("class", "x axis")
 			.attr("transform", "translate(0," + height + ")")
@@ -148,10 +153,10 @@ function showChart(){
       .append("text")
   			.text(function(d){ return (d.frequency*100).toFixed(1) + " (" + d.count + ")"; })
 			.attr("x", function(d, i){ return x(d.alph)+x.rangeBand()/2; })
-			.attr("y", function(d){ return y(d.frequency)+10; })
+			.attr("y", function(d){ return y(d.frequency) - 5; })
 			.attr("class", "label")
 			.attr("text-anchor", "middle")
-			.attr("fill", "#068587");
+			.attr("fill", "var(--bs-body-color)");
 }
 
 function type(d) {

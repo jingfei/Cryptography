@@ -26,7 +26,8 @@
 }
 
 table#transTable td.target {
-  background-color: #ED553B;
+  background-color: var(--color-light-1);
+  color: var(--color-light-2);
 }
 
 #transTable td.colorCol,
@@ -34,7 +35,7 @@ table#transTable td.target {
   animation-name: color-animation;
   animation-duration: 500ms;
   animation-fill-mode: forwards;
-  background-color: #06B587;
+  background-color: var(--color-normal);
 }
 
 @keyframes color-animation {

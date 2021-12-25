@@ -1,18 +1,19 @@
 /* translate table */
 table.table-trans > tbody > tr > td {
+	color: var(--color-light-2);
 	border: none;
 	text-align: center;
 	vertical-align: middle;
 }
 table.table-trans > tbody > tr > td:nth-child(even) {
-	background-color: #61c0a9;
+	background-color: var(--color-normal);
 }
 table.table-trans > tbody > tr > td:nth-child(odd) {
-	background-color: #73c8b3;
+	background-color: var(--color-light-1);
 }
 table.table-trans > tbody > tr > td > input {
 	display: block;
-	padding: 0;
+	padding: 5px 0;
 	margin: 0;
 	border: 0;
 	width: 100%;
